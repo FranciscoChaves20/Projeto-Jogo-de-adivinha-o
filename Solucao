@@ -1,0 +1,54 @@
+import random
+
+def pontuacao(numero_de_tentativas):
+    return 100 - numero_de_tentativas * 20
+
+resposta = random.randint(0, 10)
+
+lista= []
+for i in range(11):
+    lista.append(i)
+
+tentativas = 1
+
+print('Digite um número inteiro entre 0 e 10.\n')
+
+while tentativas <= 5:
+    try:
+        chute = int(input('Qual é o número correto? '))
+        if chute == resposta:
+            print('Parabens, você acertou o número!\nSua pontuação é '
+                  +str(pontuacao(tentativas-1))+'.\n')            
+        elif chute not in lista:
+            print('Digite um número entre 0 e 10!')
+        else:
+            print('Errou!\nTente novamente!')
+            tentativas += 1
+        
+        print('Digite 0 para não e 1 para sim.')
+        novo_jogo = bool(int(input('Gostaria de começar um novo jogo? ')))
+        if novo_jogo:
+            resposta = random.randint(0,10)
+            tentativas = 1 
+    except ValueError:
+        print('Digite um número inteiro entre 1 e 10.')
+        print('Digite 0 para não e 1 para sim.')
+        novo_jogo = bool(int(input('Gostaria de começar um novo jogo? ')))
+        if novo_jogo and tentativas != 5:
+            resposta = random.randint(0,10)
+            tentativas = 1
+            print('Digite um número inteiro entre 0 e 10.')
+
+            
+if chute == resposta: 
+    print('Jogo finalizado.')
+else:
+    print('O jogo acabou, você perdeu!\nSua pontuação é 0.')
+    print('Digite 0 para não e 1 para sim.')
+    novo_jogo = bool(int(input('Gostaria de começar um novo jogo? ')))
+    if novo_jogo:
+        resposta = random.randint(0,10)
+        tentativas = 1
+        print('Digite um número inteiro entre 0 e 10.')
+    else:
+        print('Jogo finalizado!')
